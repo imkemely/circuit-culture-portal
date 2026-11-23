@@ -1,0 +1,73 @@
+/* Shared frame + base look. Colors follow the D2 wireframes (dark header, warm off-white page). */
+:root {
+  --cc-bg: #f1ede6;
+  --cc-ink: #1f1d24;
+  --cc-muted: #6f6a62;
+  --cc-accent: #c8102e;
+  --cc-card: #ffffff;
+  --cc-border: #ddd6cb;
+}
+
+/* The Vite template centers everything and squeezes #root into 1280px with padding.
+   The extra selectors make these win no matter which stylesheet loads first. */
+html:root { color-scheme: light; }
+html body {
+  display: block;
+  margin: 0;
+  min-width: 320px;
+  background: var(--cc-bg);
+  color: var(--cc-ink);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  line-height: 1.5;
+}
+html body #root {
+  max-width: none;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  text-align: left;
+}
+
+.layout { min-height: 100vh; display: flex; flex-direction: column; }
+
+/* Header */
+.site-header {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+  gap: 8px 24px; padding: 14px 20px;
+  background: var(--cc-ink); color: #fff;
+}
+.wordmark { color: #fff; text-decoration: none; font-weight: 700; letter-spacing: 0.18em; }
+.site-nav { display: flex; align-items: center; gap: 22px; }
+.site-nav a { color: #d9d4cb; text-decoration: none; padding: 4px 0; border-bottom: 2px solid transparent; }
+.site-nav a:hover, .site-nav a.active { color: #fff; border-bottom-color: var(--cc-accent); }
+.cart-badge {
+  display: inline-block; min-width: 1.5em; padding: 0 7px; margin-left: 2px;
+  border-radius: 999px; background: var(--cc-accent); color: #fff;
+  font-size: 0.8rem; font-weight: 600; text-align: center;
+}
+
+/* Page area */
+.site-main { flex: 1; width: 100%; max-width: 1100px; margin: 0 auto; padding: 24px 16px 40px; }
+
+/* Footer */
+.site-footer {
+  display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px;
+  padding: 18px 20px; border-top: 1px solid var(--cc-border); color: var(--cc-muted); font-size: 0.9rem;
+}
+
+/* Keyboard users: jump past the header */
+.skip-link { position: absolute; left: -9999px; top: 0; background: #fff; color: var(--cc-ink); padding: 8px 12px; z-index: 10; }
+.skip-link:focus { left: 8px; top: 8px; }
+
+/* Shared helpers other pages may use (optional) */
+.layout h1 { font-size: clamp(1.6rem, 4vw, 2.3rem); line-height: 1.2; margin: 0 0 16px; }
+.layout img { max-width: 100%; height: auto; }
+.layout button { font: inherit; }
+.layout button:disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* Small phones */
+@media (max-width: 480px) {
+  .site-header { padding: 12px 14px; }
+  .site-nav { gap: 16px; }
+  .site-main { padding: 16px 12px 32px; }
+}
