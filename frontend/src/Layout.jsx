@@ -1,5 +1,5 @@
 import { Link, NavLink, Outlet } from "react-router-dom";
-import useCartCount from "../hooks/useCartCount";
+import useCartCount from "./hooks/useCartCount.js";
 import "./Layout.css";
 
 /**
