@@ -1,0 +1,72 @@
+.catalog { padding: 24px; text-align: left; }
+.catalog h1 { text-align: center; }
+.catalog-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+}
+.product-card {
+  display: block;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  transition: box-shadow 0.2s;
+}
+.product-card:hover { box-shadow: var(--shadow); }
+.product-image {
+  aspect-ratio: 1 / 1;
+  width: 100%;
+  object-fit: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--accent-bg);
+  color: var(--accent);
+  font-size: 48px;
+  font-weight: 600;
+}
+.product-card-body { padding: 12px 14px 16px; }
+.product-card-body h2 { font-size: 18px; margin: 0 0 4px; }
+.product-category { font-size: 14px; }
+.product-price { color: var(--text-h); font-weight: 600; }
+
+.product-detail {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  align-items: start;
+}
+@media (max-width: 700px) { .product-detail { grid-template-columns: 1fr; } }
+.product-detail .product-image { border-radius: 10px; }
+.product-detail h1 { text-align: left; margin: 0 0 8px; font-size: 36px; }
+.product-detail .product-price { font-size: 24px; margin: 8px 0 16px; }
+.option-label { font-weight: 600; color: var(--text-h); margin: 16px 0 8px; }
+.option-row { display: flex; flex-wrap: wrap; gap: 8px; }
+.option-btn {
+  padding: 8px 14px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: transparent;
+  color: var(--text-h);
+  cursor: pointer;
+  font: inherit;
+}
+.option-btn.selected { border-color: var(--accent); background: var(--accent-bg); }
+.option-btn:disabled { opacity: 0.4; cursor: not-allowed; text-decoration: line-through; }
+.add-btn {
+  margin-top: 24px;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  background: var(--accent);
+  color: #fff;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+.add-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.stock-note { margin-top: 12px; font-size: 14px; }
+.status-msg { text-align: center; padding: 40px 0; }
+.back-link { display: inline-block; margin-bottom: 16px; }
