@@ -1,0 +1,62 @@
+/* Basic layout for the confirmation page. Shreya can restyle this to match the site. */
+
+.confirmation {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  text-align: left;
+}
+
+.confirmation h1 {
+  margin-bottom: 0.5rem;
+}
+
+.confirmation-details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin: 1.5rem 0;
+}
+
+.confirmation-details h2 {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 0 0 0.25rem;
+  opacity: 0.7;
+}
+
+.confirmation-details p {
+  margin: 0;
+}
+
+.confirmation-items {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1.5rem;
+}
+
+.confirmation-items th,
+.confirmation-items td {
+  padding: 0.5rem;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.3);
+  text-align: left;
+}
+
+.confirmation-items tfoot td {
+  font-weight: bold;
+  border-bottom: none;
+}
+
+.confirmation-error {
+  color: #d32f2f;
+}
+
+.confirmation-button {
+  display: inline-block;
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  background: #d32f2f;
+  color: #fff;
+  text-decoration: none;
+}
