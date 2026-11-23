@@ -28,6 +28,9 @@ public class Product {
     private BigDecimal price;
     private String category;
 
+    /** Design collection: Endurance, Design District, Driven By (Miami Mango has none yet). */
+    private String collection;
+
     /** Optional image path/URL. The frontend shows a placeholder when empty. */
     private String imageUrl;
 
@@ -38,11 +41,13 @@ public class Product {
     protected Product() {
     }
 
-    public Product(String name, String description, BigDecimal price, String category, String imageUrl) {
+    public Product(String name, String description, BigDecimal price, String category,
+                   String collection, String imageUrl) {
         this.name = name;
         this.description = description;
         this.price = price;
         this.category = category;
+        this.collection = collection;
         this.imageUrl = imageUrl;
     }
 
@@ -56,6 +61,7 @@ public class Product {
     public String getDescription() { return description; }
     public BigDecimal getPrice() { return price; }
     public String getCategory() { return category; }
+    public String getCollection() { return collection; }
     public String getImageUrl() { return imageUrl; }
     public List<ProductVariant> getVariants() { return variants; }
 }

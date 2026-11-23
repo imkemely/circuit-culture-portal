@@ -96,7 +96,7 @@ function ProductPage() {
         <ProductImage product={product} />
         <div>
           <h1>{product.name}</h1>
-          <p className="product-category">{product.category}</p>
+          <p className="product-category">{product.collection} · {product.category}</p>
           <p className="product-price">${Number(product.price).toFixed(2)}</p>
           <p>{product.description}</p>
 
