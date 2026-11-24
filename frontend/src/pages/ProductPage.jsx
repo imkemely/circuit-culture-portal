@@ -1,28 +1,13 @@
 import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import ProductImage from './ProductImage.jsx'
+import { useCart } from '../cart/useCart'
+import { toCartItem } from '../cart/cartReducer'
 import './catalog.css'
-
-/**
- * Cart contract (shared with the cart page): the cart lives in localStorage
- * under the key "cart" as an array of
- *   { productId, variantId, name, size, color, price, quantity }
- */
-function addToCart(item) {
-  let cart
-  try {
-    cart = JSON.parse(localStorage.getItem('cart')) || []
-  } catch {
-    cart = []
-  }
-  const existing = cart.find((c) => c.variantId === item.variantId)
-  if (existing) existing.quantity += 1
-  else cart.push({ ...item, quantity: 1 })
-  localStorage.setItem('cart', JSON.stringify(cart))
-}
 
 function ProductPage() {
   const { id } = useParams()
+  const { addItem } = useCart()
   const [product, setProduct] = useState(null)
   const [error, setError] = useState(null)
   const [size, setSize] = useState(null)
@@ -70,14 +55,7 @@ function ProductPage() {
   }
 
   const handleAdd = () => {
-    addToCart({
-      productId: product.id,
-      variantId: variant.id,
-      name: product.name,
-      size: variant.size,
-      color: variant.color,
-      price: product.price,
-    })
+    addItem(toCartItem(product, variant), 1)
     setAdded(true)
   }
 
