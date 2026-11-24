@@ -29,6 +29,15 @@ html body #root {
 }
 
 .layout { min-height: 100vh; display: flex; flex-direction: column; }
+/* The Vite template swaps these tokens to light-on-dark when the OS is in dark mode,
+   but the page is always light. Pin light values so cart/checkout text stays readable. */
+.layout {
+  --text: #4a4651;
+  --text-h: var(--cc-ink);
+  --bg: #fff;
+  --border: var(--cc-border);
+  --accent: var(--cc-accent);
+}
 
 /* Header */
 .site-header {

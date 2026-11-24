@@ -1,5 +1,5 @@
 import { Link, NavLink, Outlet } from "react-router-dom";
-import useCartCount from "./hooks/useCartCount.js";
+import { useCart } from "./cart/useCart";
 import "./Layout.css";
 
 /**
@@ -7,7 +7,7 @@ import "./Layout.css";
  * Used once in App.jsx as a layout route, so nobody has to wrap their own page.
  */
 export default function Layout() {
-  const cartCount = useCartCount();
+  const { itemCount: cartCount } = useCart();
 
   return (
     <div className="layout">

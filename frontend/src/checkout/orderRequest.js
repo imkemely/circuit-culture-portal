@@ -25,6 +25,16 @@ export function buildOrderRequest({ details, payment, lines }) {
       cvc: payment.cvc,
       nameOnCard: payment.nameOnCard.trim(),
     },
-    items: lines.map((l) => ({ variantId: l.variantId, quantity: l.quantity })),
+    // variantId + quantity is what matters. The extra fields are needed by the orders
+    // API (see toBackendOrder in api/orders.js).
+    items: lines.map((l) => ({
+      variantId: l.variantId,
+      quantity: l.quantity,
+      productId: l.productId,
+      productName: l.name,
+      size: l.size,
+      color: l.color,
+      unitPrice: l.priceCents / 100,
+    })),
   }
 }

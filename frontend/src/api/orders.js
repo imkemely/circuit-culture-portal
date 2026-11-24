@@ -26,15 +26,40 @@ export async function placeOrder(request) {
   const res = await fetch('/api/orders', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(request),
+    body: JSON.stringify(toBackendOrder(request)),
   })
   if (res.ok) return res.json()
 
   const body = await res.json().catch(() => ({}))
-  if (res.status === 402) throw new PaymentDeclinedError(body.message)
+  // The orders API answers a declined card with 400 { error: "Payment declined..." }.
+  if (res.status === 402 || (res.status === 400 && /declined/i.test(body.error ?? ''))) {
+    throw new PaymentDeclinedError(body.message ?? body.error)
+  }
   if (res.status === 409) throw new OutOfStockError(body.variantId, body.available)
   if (res.status === 503) throw new PaymentUnavailableError(body.message)
   throw new Error(body.message || `POST /api/orders failed (${res.status})`)
+}
+
+// Translates the checkout request into the body the Spring orders API expects
+// (PlaceOrderRequest): one name, one address string, a flat card number and
+// product-level items.
+function toBackendOrder(request) {
+  const a = request.shippingAddress
+  const address = [a.line1, a.line2, `${a.city}, ${a.state} ${a.zip}`, a.country].filter(Boolean).join(', ')
+  return {
+    customerName: `${a.firstName} ${a.lastName}`.trim(),
+    email: request.email,
+    shippingAddress: address,
+    cardNumber: request.payment.cardNumber,
+    items: request.items.map((i) => ({
+      productId: i.productId,
+      productName: i.productName,
+      size: i.size,
+      color: i.color,
+      quantity: i.quantity,
+      unitPrice: i.unitPrice,
+    })),
+  }
 }
 
 let fakeOrderSeq = 0
